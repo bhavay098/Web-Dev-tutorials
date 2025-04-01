@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>DOM learning</title>
+    <style>
+        .bg-black {
+            background-color: rgb(37, 37, 37);
+            color: white;
+        }
+    </style>
+</head>
+
+<body class="bg-black">
+    <!-- DOM (Document Object Model) is a programming interface that represents an HTML document as a tree structure. It allows JavaScript to interact with and manipulate HTML elements dynamically. -->
+
+    <div>
+        <h1 id="title" class="heading">DOM learning on chai aur code <span style="display: none;">test text</span></h1>
+        <h2>Lorem ipsum dolor sit.</h2>
+        <h2>Lorem ipsum dolor sit.</h2>
+        <h2>Lorem ipsum dolor sit.</h2>
+        <p>Lorem ipsum dolor sit amet.</p>
+        <input type="password" name="" id="">
+
+        <ul>
+            <li class="list-item">one</li>
+            <li class="list-item">two</li>
+            <li class="list-item">three</li>
+            <li class="list-item">four</li>
+        </ul>
+    </div>
+
+    <!-- https://www.figma.com/design/8cGwNqtgXapKVRIBnBLxOu/HTML-DOM-(Document-object-model)?node-id=0-1&t=SazMqKs3J6R6VA5w-1 -->
+
+    <!-- document.getElementById('title')  => selecting element by id -->
+    <!-- document.getElementById('title').id  => returns the value of id -->
+    <!-- document.getElementById('title').className  => returns the value of class -->
+    <!-- document.getElementById('title').getAttribute('id')  => another way to get value of attributes -->
+    <!-- document.getElementById('title').setAttribute('class', 'test')  => overwrites previous class -->
+    <!-- title.innerText  => only returns the content which is visible -->
+    <!-- title.textContent  => returns the content of the element even if it is hidden -->
+    <!-- title.innerHTML  => returns the content of the element including HTML tags -->
+    <!-- document.querySelector('h2')  => selects the first h2 -->
+    <!-- title.style.backgroundColor = 'green' -->
+    <!-- title.innerText = 'hello'  => changes the content of the element -->
+    <!-- document.querySelectorAll('li')  => selects every li and not just the first. it returns a nodelist which is a lil similar to array but not completely an array -->
+    <!-- document.getElementsByClassName('list-item')  => gives HTML collection which is live collection of HTML elements, similar to an array but not exactly an array. Unlike a NodeList, an HTMLCollection updates automatically when the DOM changes. -->
+    <!-- allH2.style.color = 'red'  => changing CSS properties -->
+</body>
+
+</html>

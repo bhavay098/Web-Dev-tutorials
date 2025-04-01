@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>React</title>
+</head>
+
+<body>
+    <button>Button Clicked</button>
+</body>
+<script>
+    // The bind() method in JavaScript is used to set the value of this explicitly, so a function retains the correct context when called.
+    class React {
+        constructor() {
+            this.library = 'React'
+            this.server = 'http://localhost:300'
+
+            document   // we put querySelector() inside the constructor to ensure the event listener is added automatically when a React object is created.
+                .querySelector('button')
+                .addEventListener('click', this.handleClick.bind(this))  // Now, 'this' inside handleClick() also refers to the React instance.
+        }
+
+        handleClick() {
+            console.log('Button clicked')
+            console.log(this.server)
+        }
+    }
+
+    let app = new React()
+</script>
+
+</html>

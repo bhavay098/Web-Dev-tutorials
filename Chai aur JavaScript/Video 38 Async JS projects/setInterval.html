@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>setTimeout & clearTimeout</title>
+</head>
+
+<body>
+    <h1>Chai aur JavaScript</h1>
+    <button id="start">start</button>
+    <button id="stop">Stop</button>
+</body>
+<script>
+    // setInterval(function(){   // setInterval(function, interval);
+    //     console.log('Bhavay', Date.now());
+    // }, 1000)
+    // setInterval() is a JavaScript function that repeatedly executes a function at a specified time interval (in milliseconds).
+
+
+    let sayDate = function (str) {
+        console.log(str, Date.now());  // another way of performing the above function
+    }
+    // setInterval(sayDate, 1000, 'hi')  // setInterval(function, interval, param1, param2, ...)
+    // The third parameter in setInterval() allows you to pass arguments to the function being executed repeatedly.
+
+    let intervalId = setInterval(sayDate, 1000, 'hi')
+
+    clearInterval(intervalId)   // clearInterval(intervalID);
+    // clearInterval() is used to stop a repeating setInterval() before it executes again.
+
+
+
+    // +++++++++++++++++++++++++++++++++++ Assignment ++++++++++++++++++++++++++++++++++
+
+    let intervalID;
+
+    document.querySelector('#start').addEventListener('click', function () {   // clicking start button will start the interval
+        if (intervalID == null) {   // or use !intervalID   // Prevents multiple intervals
+            intervalID = setInterval(function () {   
+                console.log('Bhavay', Date.now())
+            }, 1000)
+        }
+    })
+
+    document.querySelector('#stop').addEventListener('click', function () {
+        clearInterval(intervalID)   // clicking stop button will stop the interval
+        intervalID = null   // Reset interval ID so it can start again
+    })
+</script>
+
+</html>

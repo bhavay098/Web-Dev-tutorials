@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>setTimeout & clearTimeout</title>
+</head>
+<body>
+    <h1>Chai aur code</h1>
+    <button id="stop">Stop</button>
+</body>
+<script>
+    // setTimeout(function(){   // setTimeout(function, delay);
+    //     console.log('Bhavay');
+    // }, 2000)
+    // setTimeout() is a JavaScript function that allows you to execute a function after a specified delay (in milliseconds).
+
+
+    const sayBhavay = function(){
+        console.log('Bhavay');   // another way of performing the above function
+    }
+    setTimeout(sayBhavay, 2000)
+
+
+    const changeText = function(){
+        document.querySelector('h1').innerHTML = 'best JS series'
+    }
+    // setTimeout(changeText, 2000)  // h1 will change after 2 secs
+
+
+    let changeH1 = setTimeout(changeText, 2000)
+
+    document.querySelector('#stop').addEventListener('click', function(){
+        clearTimeout(changeH1)   // clearTimeout(timeoutID);
+        console.log('STOPPED');
+    })
+    // clearTimeout() is used to cancel a setTimeout() before it executes.
+</script>
+</html>

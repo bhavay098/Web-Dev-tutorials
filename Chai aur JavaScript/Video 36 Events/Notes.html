@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Main Event object properties</title>
+</head>
+
+<body style="background-color: rgb(59, 59, 59); color: white;">
+    <a style="color: white;" href="https://www.google.com/?client=safari">Google</a>
+    <div class="container">
+        <button>Click me</button>
+    </div>
+</body>
+<script>
+    // type - Returns the type of event (e.g., "click", "keydown", "mousemove").
+
+    // document.addEventListener("click", function (event) {
+    //     console.log(event.type);  // Output: "click"
+    // });
+
+
+
+    // timeStamp - Returns the time (in milliseconds) when the event occurred, relative to when the page loaded.
+
+    // document.addEventListener("click", function (event) {
+    //     console.log(event.timeStamp);
+    // });
+
+
+
+    // defaultPrevented - It is a boolean property (true or false). It tells you whether preventDefault() was called on the event.
+
+    // document.querySelector("a").addEventListener("click", function (event) {
+    //     console.log("Before preventDefault:", event.defaultPrevented);  // false
+    //     event.preventDefault();  // Prevent link navigation
+    //     console.log("After preventDefault:", event.defaultPrevented);  // true
+    // });
+
+
+
+    // target - Returns the actual element that triggered the event. If you click a button, event.target will be that button.
+
+    // document.querySelector('button').addEventListener("click", function (event) {
+    //     console.log("Clicked element:", event.target);
+    // });
+
+
+
+    // srcElement - Older version of target, mainly used in older browsers like Internet Explorer. Use target instead.
+
+    // document.querySelector('button').addEventListener("click", function (event) {
+    //     console.log("Clicked element:", event.srcElement);
+    // });
+
+
+
+    // toElement - Returns the element the pointer moved to (only works for mouseover and mouseout). Use event.relatedTarget instead in modern browsers.
+
+    // document.querySelector('button').addEventListener("mouseover", function (event) {
+    //     console.log("Pointer moved to:", event.toElement);
+    // });
+
+
+
+    // currentTarget - Always refers to the element where the event listener was attached, not necessarily the element that triggered the event. Useful in event delegation.
+
+    // document.querySelector(".container").addEventListener("click", function (event) {
+    //     console.log("Target:", event.target);
+    //     console.log("Event listener attached to:", event.currentTarget);
+    // });
+
+
+
+    // clientX & clientY - Mouse Position Relative to the Viewport. the values of clientX and clientY are measured in pixels (px).
+    // clientX: Horizontal position (relative to the visible part of the browser).
+    // clientY: Vertical position (relative to the visible part of the browser).
+
+    // document.addEventListener("click", function (event) {
+    //     console.log("Mouse position:", event.clientX, event.clientY);
+    // });
+
+
+
+    // screenX & screenY – Mouse Position Relative to the Screen. Different from clientX and clientY because it considers multiple screens.
+    // screenX: Horizontal position (relative to the entire screen)
+    // screenY: Vertical position (relative to the entire screen).
+
+    // document.addEventListener("click", function (event) {
+    //     console.log("Screen position:", event.screenX, event.screenY);
+    // });
+
+
+
+    // tiltX & tiltY - Stylus (pen) Tilt Angle (For Touch & Stylus Devices). Useful for digital drawing applications.
+    // tiltX: The angle of the stylus left or right (-90 to +90).
+    // tiltY: The angle of the stylus forward or backward (-90 to +90).
+
+    // document.addEventListener("pointermove", function (event) {
+    //     console.log("Stylus tilt:", event.tiltX, event.tiltY);
+    // });
+
+
+
+    // altKey, ctrlKey, shiftKey – Modifier Keys. Useful for keyboard shortcuts.
+    // altKey: true if the Alt key was pressed.
+    // ctrlKey: true if the Ctrl key was pressed.
+    // shiftKey: true if the Shift key was pressed.
+
+    // document.addEventListener("keydown", function (event) {   // keydown & keyup. keypress is Deprecated
+    //     console.log("Key Pressed:", event.key);   // returns the key that was pressed
+    //     console.log("Alt Key:", event.altKey);
+    //     console.log("Ctrl Key:", event.ctrlKey);
+    //     console.log("Shift Key:", event.shiftKey);
+    //     console.log("Meta Key:", event.metaKey);   // checks for OS-specific keys: windows & command key
+    // });
+
+
+
+    // keyCode – Key Code of Pressed Key (Deprecated). Returns a numeric code for the pressed key.
+    // Deprecated – Use event.key or event.code instead.
+
+    document.addEventListener("keydown", function (event) {  
+        // console.log("KeyCode:", event.keyCode);   // event.keyCode is Deprecated (NOT IN USE now)
+        console.log("Key Pressed:", event.key);   // returns human-readable key name, like "a" or "A"
+        // console.log("Key Code:", event.code);   // Output: "KeyB", "KeyA" 
+    });
+
+</script>
+
+</html>

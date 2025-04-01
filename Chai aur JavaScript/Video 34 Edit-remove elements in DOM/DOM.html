@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit & remove elements in DOM</title>
+</head>
+
+<body style="background-color: #212121; color: white;">
+    <ul class="language">
+        <li>JavaScript</li>
+    </ul>
+</body>
+<script>
+    function addLanguage(langName) {
+        const li = document.createElement('li');  // li created
+        li.innerHTML = `${langName}`  // li content
+        document.querySelector('.language').appendChild(li)  // attaching li to ul
+    }
+    addLanguage("python")
+    addLanguage("typescript")
+
+    function addOptiLanguage(langName) {  // same function as above but optimised. this is more prefered
+        const li = document.createElement('li');
+        li.appendChild(document.createTextNode(langName))
+        document.querySelector('.language').appendChild(li)
+    }
+    addOptiLanguage('golang')
+
+    // Editing values
+
+    const secondLang = document.querySelector('li:nth-child(2)')
+    // secondLang.innerHTML = 'Mojo'   // editing the content of 2nd li. not a preferable approach as it is not optimised as it traverses through node tree
+    const newli = document.createElement('li')  // new li element created
+    newli.textContent = 'Mojo'  // content added
+    secondLang.replaceWith(newli)  // replaces an existing element with a new element or content.
+
+    // Edit
+    const firstLang = document.querySelector('li:first-child')
+    firstLang.outerHTML = '<li>TypeScript</li>'  // outerHTML returns or sets the entire HTML of an element, including the element itself.
+
+    
+    // Removing values
+    const lastLang = document.querySelector('li:last-child')
+    lastLang.remove()  // .remove() method is used to delete an element from the DOM.
+</script>
+
+</html>

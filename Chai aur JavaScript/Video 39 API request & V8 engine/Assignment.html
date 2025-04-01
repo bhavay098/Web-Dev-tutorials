@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>User card</h1>
+    <img src="" alt="">
+    <p id="name"></p>
+    <p id="followers"></p>
+    <button class="btn">Click to show user info</button>
+</body>
+<script>
+    document.querySelector('.btn').addEventListener('click', function () {
+        let avatar;
+        let name;
+        let followers;
+        let url = 'https://api.github.com/users/hiteshchoudhary'
+        let xhr = new XMLHttpRequest()
+        xhr.open('GET', url)
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4) {
+                let data = JSON.parse(this.responseText)
+                avatar = data.avatar_url
+                name = data.name
+                followers = data.followers
+                document.querySelector('img').src = avatar;
+                document.querySelector('#name').innerHTML = name;
+                document.querySelector('#followers').innerHTML = `No. of followers: ${followers}`;
+                document.querySelector('.btn').style.display = 'none'
+            }
+        }
+        xhr.send()
+    })
+</script>
+
+</html>

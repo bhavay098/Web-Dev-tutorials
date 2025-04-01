@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Object Fit and Position</title>
+    <style>
+        .container {
+            width: 466px;
+            height: 488px;
+            border: 2px solid black;
+            /* background-color: azure; */
+            background-position: center center;
+            background-clip: border-box;
+            background-image: url("https://media.istockphoto.com/id/157593967/photo/flower-background.jpg?s=612x612&w=0&k=20&c=HqVFkcrXQuERoY3x3hrG9aj77d1YjxdPnXd1Ox_kXHY=");
+            background-repeat: no-repeat;
+        }
+
+        img{
+            width: 466px;
+            height: 488px;
+            object-fit: contain;
+            /* object-fit: fill; */
+            object-position: 10px 20px;
+            /* object-position: bottom right; */
+            /* object-fit: contain; */
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <!-- <img src="https://letsenhance.io/static/a31ab775f44858f1d1b80ee51738f4f3/11499/EnhanceAfter.jpg" alt=""> -->
+    </div>
+</body>
+
+</html>

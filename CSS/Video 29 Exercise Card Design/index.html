@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Card Design</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: gray;
+            padding: 45px;
+        }
+
+        .card {
+            background-color: white;
+            width: 330px;
+            height: 425px;
+            border-radius: 10px;
+            padding: 0px 0px 50px 0px;
+        }
+
+        .image {
+            padding: 5px;
+        }
+
+        .image img {
+            border-radius: 10px;
+        }
+
+        .content {
+            padding: 3px 13px;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .content p {
+            font-size: 14px;
+            color: grey;
+        }
+
+        .capsules span {
+            border: 1px solid gray;
+            padding: 1px 6px;
+            border-radius: 10px;
+            font-size: 13px;
+        }
+
+        .capsules {
+            padding: 5px 12px;
+        }
+
+        .button {
+            text-align: center;
+        }
+
+        .button button {
+            padding: 7px 12px;
+            border: none;
+            border-radius: 20px;
+            background-color: rgb(221, 242, 252);
+            color: rgb(0, 174, 255);
+            font-size: 11px;
+            font-weight: bold;
+            margin-top: 5px;
+            cursor:pointer;
+        }
+
+        .button button:hover {
+            background-color: rgb(179, 227, 249);
+            color: rgb(143, 190, 212);
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Card.png is a file which contains a card Image. Write html and css code to design this card -->
+    <div class="card">
+
+        <div class="image">
+            <img width="320px"
+                src="https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fGZvcmVzdHxlbnwwfHwwfHx8MA%3D%3D"
+                alt="">
+        </div>
+        <div class="capsules">
+            <span>Nature</span>
+            <span>Lake</span>
+        </div>
+        <div class="content">
+            <h2>Bhavay</h2>
+            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit libero eaque maiores
+                recusandae labore molestias explicabo natus inventore atque fugiat id quidem hic facilis in et, aut
+                eum eligendi minima.</p>
+        </div>
+        <div class="button">
+            <button>Read More</button>
+        </div>
+
+    </div>
+
+
+</body>
+
+</html>

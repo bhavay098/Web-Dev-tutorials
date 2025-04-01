@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM</title>
+</head>
+
+<body style="background-color: rgb(37, 37, 37); color: white;">
+    <div class="parent">
+        <!-- this is a comment  -->
+        <div class="day">Monday</div>
+        <div class="day">Tuesday</div>
+        <div class="day">Wednesday</div>
+        <div class="day">Thursday</div>
+    </div>
+</body>
+<script>
+    const parent = document.querySelector('.parent')
+    // console.log(parent);
+    // console.log(parent.children);
+    // console.log(parent.children[1].innerHTML);
+
+    // for (let i = 0; i < parent.children.length; i++) {
+    //     console.log(parent.children[i].innerHTML);
+    // }
+    parent.children[1].style.color = 'orange'
+    // console.log(parent.firstElementChild);  // going from parent to child
+    // console.log(parent.lastElementChild);
+
+    const day1 = document.querySelector('.day')
+    // console.log(day1);
+    // console.log(day1.parentElement);  // going from child to parent
+    // console.log(day1.nextElementSibling);  // goes to the next element
+
+    console.log('NODES: ', parent.childNodes)
+    // childNodes returns a NodeList of all child nodes inside parent, including:
+    // Elements (<div>, <p>, <span>, etc.)
+    // Text nodes (spaces, new lines, and actual text)
+    // Comment nodes
+</script>
+
+</html>

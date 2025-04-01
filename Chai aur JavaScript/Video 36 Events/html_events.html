@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML Events</title>
+</head>
+
+<body style="background-color: rgb(55, 55, 55); color: white;">
+    <h2>Amazing image</h2>
+    <div>
+        <ul id="images">
+            <li><img width="200px" id="photoshop" src="https://images.pexels.com/photos/3561339/pexels-photo-3561339.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load" alt="photoshop"></li>
+            <li><img width="200px" id="japan" src="https://images.pexels.com/photos/3532553/pexels-photo-3532553.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load" alt=""></li>
+            <li><img width="200px" id="river" src="https://images.pexels.com/photos/3532551/pexels-photo-3532551.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load" alt=""></li>
+            <li><img width="200px" id="owl" src="https://images.pexels.com/photos/3532552/pexels-photo-3532552.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load" alt=""></li>
+            <li><img width="200px" id="prayer" src="https://images.pexels.com/photos/2522671/pexels-photo-2522671.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load" alt=""></li>
+            <li><a style="color: white;" href="https://google.com" id="google" target="_blank">Google</a></li>
+        </ul>
+    </div>
+</body>
+<script>
+    // document.getElementById('owl').onclick = function(){    // this approach is not preferred
+    //     alert('owl clicked')
+    // }
+
+    // attachEvent()
+    // jQuery - onEventListener
+
+    // addEventListener method is used to attach an event handler to an HTML element. It allows you to run JavaScript code when a user interacts with an element (e.g., clicking a button, hovering over a link, pressing a key).
+    
+    // type, timestamp, defaultPrevented
+    // target, toElement, srcElement, currentTarget,        
+    // clientX, clientY, screenX, screenY, tiltX, tiltY     // study all these about EventListeners for Interview
+    // altkey, ctrlkey, shiftkey, keyCode
+    // event propagation
+
+    // document.getElementById('images').addEventListener('click', function(e){  // element.addEventListener(event, function, useCapture);
+    //     console.log('clicked inside the ul');  // useCapture: (Optional) true or false (default: false). Controls event propagation.    
+    // }, false)           // this is the preferable approach      
+    
+    // document.getElementById('owl').addEventListener('click', function(e){
+    //     console.log('owl clicked');
+    //     e.stopPropagation()   // Stops event from reaching parent or child
+    // }, false)
+
+    // document.getElementById('google').addEventListener('click', function(e){
+    //     e.preventDefault()   // Prevents the link from opening
+    //     e.stopPropagation()
+    //     console.log('google clicked')
+    // }, false)
+
+    document.querySelector('#images').addEventListener('click', function(e){
+        // console.log(e.target.parentNode);   // e.target refers to the exact element that was clicked (the event target).
+        console.log(e.target.tagName);     // tagName property returns the uppercase tag name of an HTML element.
+        if (e.target.tagName === 'IMG') {   // Ensures that the clicked element is an <img>
+            console.log(e.target.id);     // prints the id of clicked event
+            let removeIt = e.target.parentNode   // parentNode refers to the parent element of the clicked element.
+            removeIt.remove()
+        }   
+    }, false)                              
+    // removeIt.parentNode.removeChild(removeIt)   // another method to remove the element         
+
+</script>
+</html>
