@@ -18,4 +18,4 @@ console.log(3);
 console.log(4);
 
 // Default thread pool size = 4
-// Max? - 8 core CPU -> 8 threads
+// Max thread pool size = 128
