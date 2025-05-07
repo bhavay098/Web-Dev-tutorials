@@ -1,0 +1,6 @@
+1746566755894: ::1: GET: /api/users
+1746611750091: ::1: GET: /api/users
+1746611822638: ::1: GET: /api/users
+1746611890532: ::1: POST: /api/users
+1746611972596: ::1: GET: /api/users/681b2eb2ba8796a8be307216
+1746611990230: ::1: DELETE: /api/users/681b2eb2ba8796a8be307216
