@@ -59,3 +59,19 @@ const myRef = useRef(initialValue);
 
 - `myRef` is an object: `{ current: initialValue }`
 - You can change `myRef.current` anytime — no re render happens.
+
+---
+
+# Difference between `useCallback` and `useEffect`:
+
+| Feature            | `useEffect`                                    | `useCallback`                                              |
+| ------------------ | ---------------------------------------------- | ---------------------------------------------------------- |
+| 💡 Purpose         | To **run side-effects** (like fetch, log, DOM) | To **memoize a function** so it’s not recreated            |
+| ⚙️ What it returns | **Nothing**, but can return a cleanup function | A **memoized function**                                    |
+| 🔁 Runs when       | Dependencies change (after render)             | Dependencies change (but doesn’t run, just returns new fn) |
+| ⏱️ Timing          | Runs **after render**                          | Function is **created during render**                      |
+| 📌 Used for        | API calls, timers, subscriptions, etc.         | Passing stable functions to child components or handlers   |
+| 🧼 Can clean up?   | ✅ Yes, in return function                      | ❌ No cleanup — it's just a function                        |
+
+- `useEffect` = Do something when values change
+- `useCallback` = Remember a function until values change
