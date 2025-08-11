@@ -29,6 +29,7 @@ import Github, { githubInfoLoader } from './components/Github/Github.jsx'
 //     ]
 //   }   // Layout is shared, but the middle content depends on the path.
 // ])
+
 /*
 User visits /about
 ↓
@@ -43,7 +44,7 @@ Layout component is rendered
 // another way of creating routes
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route path='' element={<Layout />}>
+    <Route path='/' element={<Layout />}>
       <Route path='' element={<Home />} />
       <Route path='about' element={<About />} />
       <Route path='contact' element={<Contact />} />
