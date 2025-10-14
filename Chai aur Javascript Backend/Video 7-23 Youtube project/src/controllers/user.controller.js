@@ -52,7 +52,7 @@ const registerUser = asyncHandler(async (req, res) => {
     const existedUser = await User.findOne({
         $or: [{ username }, { email }]   // $or is MongoDB operator that checks multiple conditions. Short for { username: username }, { email: email }
     })
-    console.log('existedUser', existedUser)
+    // console.log('existedUser', existedUser)
 
     // If user already exists, throw a 409 (Conflict) error
     if (existedUser) {
@@ -75,7 +75,7 @@ const registerUser = asyncHandler(async (req, res) => {
 
     // Double-check that avatar upload was successful
     if (!avatar) {
-        throw new ApiError(400, 'Avatar file is required')
+        throw new ApiError(400, 'Could not upload avatar due to some error')
     }
 
     // Step 6: Create new user entry in database
