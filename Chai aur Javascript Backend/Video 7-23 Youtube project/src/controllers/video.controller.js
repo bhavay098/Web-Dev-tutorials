@@ -1,10 +1,10 @@
-import mongoose, { isValidObjectId } from "mongoose"
 import { Video } from "../models/video.model.js"
 import { User } from "../models/user.model.js"
 import { ApiError } from "../utils/ApiError.js"
 import { ApiResponse } from "../utils/ApiResponse.js"
 import { asyncHandler } from "../utils/asyncHandler.js"
 import { deleteFromCloudinary, uploadOnCloudinary } from "../utils/cloudinary.js"
+import { validateMongoId } from "../utils/validateMongoId.js"
 
 
 const getAllVideos = asyncHandler(async (req, res) => {
@@ -64,15 +64,7 @@ const getVideoById = asyncHandler(async (req, res) => {
     //TODO: get video by id
 
     const { videoId } = req.params   // Extract videoId from URL parameters (e.g., /videos/:videoId)
-
-    if (!videoId?.trim()) {   // Check if videoId exists and is not just whitespace
-        throw new ApiError(400, 'video id is missing')
-    }
-
-    // Validate that videoId is a valid MongoDB ObjectId format. This prevents unnecessary database queries with invalid IDs
-    if (!isValidObjectId(videoId)) {
-        throw new ApiError(400, 'Invalid video ID')
-    }
+    validateMongoId(videoId, 'Video ID')   // Validate videoId format and existence in req.params before proceeding
 
     const video = await Video.findById(videoId)   // Query database to find video by its ID
 
@@ -94,15 +86,7 @@ const updateVideo = asyncHandler(async (req, res) => {
     //TODO: update video details like title, description, thumbnail
 
     const { videoId } = req.params   // Extract videoId from URL parameters (e.g., /videos/:videoId)
-
-    if (!videoId?.trim()) {   // Check if videoId exists and is not just whitespace
-        throw new ApiError(400, 'video id is missing')
-    }
-
-    // Validate that videoId is a valid MongoDB ObjectId format. This prevents unnecessary database queries with invalid IDs
-    if (!isValidObjectId(videoId)) {
-        throw new ApiError(400, 'Invalid video ID')
-    }
+    validateMongoId(videoId, 'Video ID')   // Validate videoId format and existence in req.params before proceeding
 
     // Check if video exists in database before proceeding. This prevents wasting resources on non-existent videos (fail fast approach)
     const oldVideo = await Video.findById(videoId)
@@ -162,15 +146,7 @@ const deleteVideo = asyncHandler(async (req, res) => {
     //TODO: delete video
 
     const { videoId } = req.params   // Extract videoId from URL parameters (e.g., /videos/:videoId)
-
-    if (!videoId?.trim()) {   // Check if videoId exists and is not just whitespace
-        throw new ApiError(400, 'video id is missing')
-    }
-
-    // Validate that videoId is a valid MongoDB ObjectId format. This prevents unnecessary database queries with invalid IDs
-    if (!isValidObjectId(videoId)) {
-        throw new ApiError(400, 'Invalid video ID')
-    }
+    validateMongoId(videoId, 'Video ID')   // Validate videoId format and existence in req.params before proceeding
 
     // Find and delete video in one database operation (optimized approach). Returns the deleted document if found, or null if not found
     const video = await Video.findByIdAndDelete(videoId)
@@ -196,23 +172,14 @@ const deleteVideo = asyncHandler(async (req, res) => {
 
 const togglePublishStatus = asyncHandler(async (req, res) => {
     const { videoId } = req.params   // Extract videoId from URL parameters (e.g., /videos/:videoId/toggle-publish)
+    validateMongoId(videoId, 'Video ID')   // Validate videoId format and existence in req.params before proceeding
 
-    if (!videoId?.trim()) {   // Check if videoId exists and is not just whitespace
-        throw new ApiError(400, 'video id is missing')
-    }
-
-    // Validate that videoId is a valid MongoDB ObjectId format. This prevents unnecessary database queries with invalid IDs
-    if (!isValidObjectId(videoId)) {
-        throw new ApiError(400, 'Invalid video ID')
-    }
-
-    const video = await Video.findById(videoId)   // Find video by ID to get current publish status
+    const video = await Video.findById(videoId)   // Find video by ID in DB to get current publish status
 
     if (!video) {   // Check if video exists in database
         throw new ApiError(404, 'Video not found')
     }
 
-    
     video.isPublished = !video.isPublished   // Toggle the isPublished field (true becomes false, false becomes true). ! operator inverts the boolean value
     await video.save()   // Save the updated video document to database. Using .save() instead of findByIdAndUpdate to work with the existing document
 
