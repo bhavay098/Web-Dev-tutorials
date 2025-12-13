@@ -25,7 +25,6 @@ router.route("/")
                 name: "thumbnail",
                 maxCount: 1,
             },
-
         ]),
         publishVideo
     );
