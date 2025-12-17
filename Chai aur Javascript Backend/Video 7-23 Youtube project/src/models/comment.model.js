@@ -1,6 +1,5 @@
 import mongoose, { Schema } from 'mongoose'
 import mongooseAggregatePaginate from 'mongoose-aggregate-paginate-v2'   // Import pagination plugin to add pagination functionality to aggregation queries
-import { validateMongoId } from "../utils/validateMongoId.js"
 
 // Define the schema structure for comments in the database. This represents user comments on videos (like YouTube comments)
 const commentSchema = new Schema({

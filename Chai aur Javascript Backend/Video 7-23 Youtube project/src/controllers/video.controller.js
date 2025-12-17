@@ -14,8 +14,8 @@ const getAllVideos = asyncHandler(async (req, res) => {
 
     const { page = 1, limit = 10, query, sortBy, sortType, userId } = req.query   // Extract query parameters from the request. Set default values: page=1, limit=10 if not provided
 
-    const pageNumber = parseInt(page)   // Convert page and limit to numbers (they come as strings from URL)
-    const limitNumber = parseInt(limit)
+    const pageNumber = parseInt(page, 10)   // Convert page and limit to numbers (they come as strings from URL)
+    const limitNumber = parseInt(limit, 10)
 
     // Validate page number - must be 1 or greater
     if (pageNumber < 1 || isNaN(pageNumber)) {
@@ -176,7 +176,7 @@ const publishVideo = asyncHandler(async (req, res) => {
     })
 
     if (!video) {   // checking whether video dociment exists in DB
-        throw new ApiError("404", "failed to publish");
+        throw new ApiError(500, "failed to publish");
     }
 
     // Return success response with created video data
@@ -250,6 +250,11 @@ const updateVideo = asyncHandler(async (req, res) => {
         throw new ApiError(404, 'Video not found')
     }
 
+    // Check if the logged-in user is the owner of the video (security check to prevent unauthorized updates)
+    if (!oldVideo.owner.equals(req.user._id)) {
+        throw new ApiError(403, 'You are not authorized to update this video')
+    }
+
     const { title, description, } = req.body   // Extract title and description from request body
 
     if (!title || !description) {   // Validate that both title and description are provided
@@ -283,6 +288,11 @@ const updateVideo = asyncHandler(async (req, res) => {
         { new: true }   // { new: true } option returns the updated document instead of the old one
     )
 
+    if (!video) {   // If update failed, delete the newly uploaded thumbnail to avoid orphaned files
+        await deleteFromCloudinary(thumbnail.public_id)
+        throw new ApiError(500, 'Failed to update video')
+    }
+
     // Delete old thumbnail from Cloudinary after successful update. This keeps cloud storage clean and prevents orphaned files
     // Done after update to ensure we don't lose the old thumbnail if update fails
     await deleteFromCloudinary(oldVideo.thumbnailPublicId)
@@ -303,13 +313,20 @@ const deleteVideo = asyncHandler(async (req, res) => {
     const { videoId } = req.params   // Extract videoId from URL parameters (e.g., /videos/:videoId)
     validateMongoId(videoId, 'Video ID')   // Validate videoId format and existence in req.params before proceeding
 
-    // Find and delete video in one database operation (optimized approach). Returns the deleted document if found, or null if not found
-    const video = await Video.findByIdAndDelete(videoId)
+    const video = await Video.findById(videoId)   // fetching video to be deleted from videoId
 
     // Check if video existed in database. If video is null, it means no document was found with that ID
     if (!video) {
         throw new ApiError(404, 'Video not found')
     }
+
+    // Check if the logged-in user is the owner of the video (security check to prevent unauthorized updates)
+    if (!video.owner.equals(req.user._id)) {
+        throw new ApiError(403, 'You are not authorized to update this video')
+    }
+
+    // Delete the video document from the database. This removes all video metadata (title, description, etc.)
+    await Video.findByIdAndDelete(videoId)
 
     // Delete video file & thumbnail from Cloudinary using their public ID. This cleans up cloud storage and prevents orphaned files
     await deleteFromCloudinary(video.videoFilePublicId)
@@ -333,6 +350,11 @@ const togglePublishStatus = asyncHandler(async (req, res) => {
 
     if (!video) {   // Check if video exists in database
         throw new ApiError(404, 'Video not found')
+    }
+
+    // Check if the logged-in user is the owner of the video (security check to prevent unauthorized updates)
+    if (!video.owner.equals(req.user._id)) {
+        throw new ApiError(403, 'You are not authorized to update this video')
     }
 
     video.isPublished = !video.isPublished   // Toggle the isPublished field (true becomes false, false becomes true). ! operator inverts the boolean value

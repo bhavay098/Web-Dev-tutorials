@@ -21,7 +21,7 @@ export const verifyJWT = asyncHandler(async (req, _, next) => {
     // Find user in DB using ID from decoded token. Exclude sensitive fields like password and refreshToken
     const user = await User.findById(decodedToken?._id).select('-password -refreshToken -avatarPublicId -coverImagePublicId')
 
-    // 5️⃣ If user does not exist (e.g., deleted), throw 401 error
+    // If user does not exist (e.g., deleted), throw 401 error
     if (!user) {
         throw new ApiError(401, 'Invalid Access Token')
     }
