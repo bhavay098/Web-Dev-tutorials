@@ -36,6 +36,10 @@ const videoSchema = new Schema({
         required: true,
         default: 0
     },
+    likes: {
+        type: Number,
+        default: 0
+    },
     isPublished: {
         type: Boolean,   // Whether video is public or not
         required: true,
@@ -46,7 +50,7 @@ const videoSchema = new Schema({
         ref: 'User',   // Each video belongs to a user
         required: true
     }
-    
+
 }, { timestamps: true })
 
 

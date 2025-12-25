@@ -7,6 +7,10 @@ const tweetSchema = new Schema({
         type: String,   // Data type is string
         required: true   // This field is mandatory - cannot create an empty tweet
     },
+    likes: {
+        type: Number,
+        default: 0,
+    },
     owner: {   // Reference to the user who posted this tweet
         type: Schema.Types.ObjectId,   // Store the ID of the user who created the tweet
         ref: 'User',   // References the User model/collection

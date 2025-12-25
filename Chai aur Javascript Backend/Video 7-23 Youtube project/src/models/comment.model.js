@@ -12,6 +12,10 @@ const commentSchema = new Schema({
         ref: 'Video'   // References the Video model/collection
         // required: true - Not required, because we might allow comments on Tweets too, etc.
     },
+    likes: {
+        type: Number,
+        default: 0,
+    },
     owner: {   // Reference to the user who wrote this comment
         type: Schema.Types.ObjectId,   // Store the ID of the user who made the comment
         ref: 'User',   // References the User model/collection
