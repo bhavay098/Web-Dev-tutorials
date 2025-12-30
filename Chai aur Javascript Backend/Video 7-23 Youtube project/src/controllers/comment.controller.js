@@ -4,12 +4,18 @@ import { ApiError } from "../utils/ApiError.js"
 import { ApiResponse } from "../utils/ApiResponse.js"
 import { asyncHandler } from "../utils/asyncHandler.js"
 import { validateMongoId } from "../utils/validateMongoId.js"
+import { Video } from "../models/video.model.js"
 
 const getVideoComments = asyncHandler(async (req, res) => {
     //TODO: get all comments for a video
 
     const { videoId } = req.params   // Extract videoId from the URL parameters (e.g., /api/videos/:videoId/comments)
     validateMongoId(videoId, 'Video ID')   // Validate that the videoId is a valid MongoDB ObjectId format
+
+    const videoExists = await Video.exists({ _id: videoId })
+    if (!videoExists) {
+        throw new ApiError(404, 'Video not found')
+    }
 
     const { page = 1, limit = 10 } = req.query   // Get pagination parameters from query string
 
@@ -154,10 +160,6 @@ const updateComment = asyncHandler(async (req, res) => {
         { $set: { content: editedContent.trim() } },  // What to update - set content to new value (trimmed)
         { new: true }                                 // Options: return the UPDATED document (not the old one)
     )
-
-    if (!comment) {   // Check if the update operation failed
-        throw new ApiError(500, 'error while updating')
-    }
 
     // Return success response with status 200 (OK). Send back the updated comment data
     return res
