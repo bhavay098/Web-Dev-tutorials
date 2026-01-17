@@ -1,9 +1,9 @@
-// import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import appwriteService from '../appwrite/config'
 import { Container, PostCard } from '../components'
 
 function AllPosts() {
-    // const [posts, setPosts] = useState([])   // State to store the list of posts fetched from the backend
+    const [posts, setPosts] = useState([])   // State to store the list of posts fetched from the backend
 
     // useEffect runs when the component mounts (because of [])
     useEffect(() => {
